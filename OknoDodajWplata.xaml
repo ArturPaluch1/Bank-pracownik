@@ -1,0 +1,166 @@
+﻿<Window x:Class="WpfApplication1.OknoDodajWplata"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d"
+         
+        Title="OknoDodajWplata" Name="NameOknoDodajWplata" Height="auto" MinHeight="400" Width="800"  >
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="25"/>
+
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Height" Value="25"/>
+
+        </Style>
+        <Style TargetType="Label" >
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Button" >
+
+            <Setter Property="FontSize" Value="20"/>
+
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+
+        </Style>
+
+        <Style TargetType="DataGrid">
+
+
+
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="RowBackground" Value="LightYellow"/>
+            <Setter Property="AlternatingRowBackground" Value="LightBlue"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="Cell"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+
+            <Setter Property="CanUserResizeColumns" Value="False"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ColumnWidth" Value="120*"/>
+
+            <Setter Property="CanUserResizeRows" Value="False"/>
+        </Style>
+        <Style TargetType="ColumnDefinition" >
+
+
+            <Setter Property="Width"  Value="75* "/>
+
+        </Style>
+        <Style TargetType="RowDefinition" >
+
+
+            <Setter Property="Height"  Value=" 50"/>
+
+        </Style>
+
+
+
+
+
+    </Window.Resources>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+
+
+
+        <Label x:Name="Tytul" Content="Przeprowadzanie Wpłaty" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Width="300" HorizontalContentAlignment="Center" HorizontalAlignment="Center"  FontWeight="Bold" />
+            <Label x:Name="KwotaPrzelwu" Content="Kwota wpłaty" Grid.Column="0" Grid.Row="1" />
+
+            <TextBox x:Name="textBoxKwotaPrzelewu" Grid.Column="1" Grid.Row="1"    TextWrapping="Wrap"   GotFocus="zaznaczonytextBoxKwotaPrzelewu" />
+          
+
+            <Button x:Name="dodaj" Content="wpłać" Grid.Column="2" Grid.Row="1"   Click="dodaj_Click"/>
+            <Button x:Name="anuluj" Content="anuluj" Grid.Column="3" Grid.Row="1"   Click="anuluj_Click"/>
+
+        <Label Content="Wybierz klienta"  Width="300"  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"  HorizontalAlignment="Left"/>
+        <DataGrid  Name="dataGridKlienci2" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5" Height=" 200" Width="800"  HorizontalAlignment="Stretch" >
+
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True"  >
+
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="DodgerBlue" Offset="1"/>
+                                                <GradientStop Color="White" Offset="0"/>
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Foreground" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Columns >
+
+                        <DataGridTextColumn Header="ID"  MinWidth="20" MaxWidth="50" Width="20*" Binding="{Binding Id_klienta }" />
+                        <DataGridTextColumn Header="Imię"  MinWidth="75"  Width="75*" Binding="{Binding Imię}" />
+                        <DataGridTextColumn Header="Nazwisko"  MinWidth="75"  Width="75*" Binding="{Binding Nazwisko}"/>
+                        <DataGridTextColumn Header="Telefon"  MinWidth="75"  Width="75*" Binding="{Binding Telefon}"/>
+                        <DataGridTextColumn Header="Miasto"  MinWidth="75"  Width="75*" Binding="{Binding Miasto}"/>
+                        <DataGridTextColumn Header="Ulica"  MinWidth="75"  Width="75*" Binding="{Binding Ulica}"/>
+
+                        <!--     <DataGridCheckBoxColumn    Header="x"   Width="auto" Binding="{Binding zaznaczony, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                                 
+                                </DataGridCheckBoxColumn>  -->
+                        <DataGridTemplateColumn Header="x">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="all" Content="Select All" Click="CheckBox_Click" IsChecked="{Binding IsChecked}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox Tag="checkbox" IsChecked="{Binding zaznaczony, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+
+
+
+
+
+        </Grid>
+ 
+</Window>

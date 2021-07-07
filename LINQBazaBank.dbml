@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Bank" Class="LINQBazaBankDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=Bank;Integrated Security=True" SettingsObjectName="Bank.Properties.Settings" SettingsPropertyName="BankConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Klienci" Member="Klienci">
+    <Type Name="Klienci">
+      <Column Name="[Id klienta]" Member="Id_klienta" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Imię" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Nazwisko" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[Numer rachunku]" Member="Numer_rachunku" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Data założenia]" Member="Data_założenia" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Telefon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Miasto" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ulica" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="zaznaczony" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Środki" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Klienci_Kredyty" Member="Kredyty" ThisKey="Id_klienta" OtherKey="Klient" Type="Kredyty" />
+      <Association Name="Klienci_Lokaty" Member="Lokaty" ThisKey="Id_klienta" OtherKey="Klient" Type="Lokaty" />
+      <Association Name="Klienci_Przelewy" Member="Przelewy" ThisKey="Id_klienta" OtherKey="Nadawca" Type="Przelewy" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kredyty" Member="Kredyty">
+    <Type Name="Kredyty">
+      <Column Name="[Id Kredytu]" Member="Id_Kredytu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Klient" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Rodzaj kredytu]" Member="Rodzaj_kredytu" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Kwota kredytu]" Member="Kwota_kredytu" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="[Kredytu udzielił]" Member="Kredytu_udzielił" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="zaznaczony" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Data założenia]" Member="Data_założenia" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="aktywny" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Klienci_Kredyty" Member="Klienci" ThisKey="Klient" OtherKey="Id_klienta" Type="Klienci" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Pracownicy_Kredyty" Member="Pracownicy" ThisKey="Kredytu_udzielił" OtherKey="Id_Pracownika" Type="Pracownicy" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Rodzaje_kredytów_Kredyty" Member="Rodzaje_kredytów" ThisKey="Rodzaj_kredytu" OtherKey="Id_rodzaju_kredytu" Type="Rodzaje_kredytów" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lokaty" Member="Lokaty">
+    <Type Name="Lokaty">
+      <Column Name="[Id Lokaty]" Member="Id_Lokaty" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[Wysokość lokaty]" Member="Wysokość_lokaty" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Klient" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Id Rodzaju lokaty]" Member="Id_Rodzaju_lokaty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Lokaty udzielił]" Member="Lokaty_udzielił" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="zaznaczony" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="[Data założenia]" Member="Data_założenia" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="aktywny" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Klienci_Lokaty" Member="Klienci" ThisKey="Klient" OtherKey="Id_klienta" Type="Klienci" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Pracownicy_Lokaty" Member="Pracownicy" ThisKey="Lokaty_udzielił" OtherKey="Id_Pracownika" Type="Pracownicy" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="Rodzaje_lokat_Lokaty" Member="Rodzaje_lokat" ThisKey="Id_Rodzaju_lokaty" OtherKey="Id_rodzaju_lokaty" Type="Rodzaje_lokat" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pracownicy" Member="Pracownicy">
+    <Type Name="Pracownicy">
+      <Column Name="[Id Pracownika]" Member="Id_Pracownika" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[Imię pracownika]" Member="Imię_pracownika" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[Nazwisko pracownika]" Member="Nazwisko_pracownika" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PESEL" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Wynagrodzenie" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="[Data zatrudnienia]" Member="Data_zatrudnienia" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="zaznaczony" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Telefon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Pracownicy_Kredyty" Member="Kredyty" ThisKey="Id_Pracownika" OtherKey="Kredytu_udzielił" Type="Kredyty" />
+      <Association Name="Pracownicy_Lokaty" Member="Lokaty" ThisKey="Id_Pracownika" OtherKey="Lokaty_udzielił" Type="Lokaty" />
+      <Association Name="Pracownicy_Rodzaje_kredytów" Member="Rodzaje_kredytów" ThisKey="Id_Pracownika" OtherKey="Kredyt_utworzył" Type="Rodzaje_kredytów" />
+      <Association Name="Pracownicy_Rodzaje_lokat" Member="Rodzaje_lokat" ThisKey="Id_Pracownika" OtherKey="Lokatę_utworzył" Type="Rodzaje_lokat" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Przelewy" Member="Przelewy">
+    <Type Name="Przelewy">
+      <Column Name="[Id Przelewu]" Member="Id_Przelewu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Kwota" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="[Nazwa odbiorcy]" Member="Nazwa_odbiorcy" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="[Numer rachunku odbiorcy]" Member="Numer_rachunku_odbiorcy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Tytuł przelewu]" Member="Tytuł_przelewu" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="zaznaczony" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Nadawca" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Klienci_Przelewy" Member="Klienci" ThisKey="Nadawca" OtherKey="Id_klienta" Type="Klienci" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Rodzaje kredytów]" Member="Rodzaje_kredytów">
+    <Type Name="Rodzaje_kredytów">
+      <Column Name="[Id rodzaju kredytu]" Member="Id_rodzaju_kredytu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nazwa" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Oprocentowanie" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="[Okres kredytowania(w mies.)]" Member="Okres_kredytowania_w_mies__" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Prowizja" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="[Kredyt utworzył]" Member="Kredyt_utworzył" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="zaznaczony" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Rodzaje_kredytów_Kredyty" Member="Kredyty" ThisKey="Id_rodzaju_kredytu" OtherKey="Rodzaj_kredytu" Type="Kredyty" />
+      <Association Name="Pracownicy_Rodzaje_kredytów" Member="Pracownicy" ThisKey="Kredyt_utworzył" OtherKey="Id_Pracownika" Type="Pracownicy" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Rodzaje lokat]" Member="Rodzaje_lokat">
+    <Type Name="Rodzaje_lokat">
+      <Column Name="[Id rodzaju lokaty]" Member="Id_rodzaju_lokaty" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nazwa" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Oprocentowanie" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="[Okres(w mies.)]" Member="Okres_w_mies__" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Prowizja" Type="System.Single" DbType="Real NOT NULL" CanBeNull="false" />
+      <Column Name="[Lokatę utworzył]" Member="Lokatę_utworzył" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="zaznaczony" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="aktywny" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Rodzaje_lokat_Lokaty" Member="Lokaty" ThisKey="Id_rodzaju_lokaty" OtherKey="Id_Rodzaju_lokaty" Type="Lokaty" />
+      <Association Name="Pracownicy_Rodzaje_lokat" Member="Pracownicy" ThisKey="Lokatę_utworzył" OtherKey="Id_Pracownika" Type="Pracownicy" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+</Database>
