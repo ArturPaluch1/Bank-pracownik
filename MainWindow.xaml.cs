@@ -39,7 +39,7 @@ select new { c.Id_Pracownika, c.Imię_pracownika, c.Nazwisko_pracownika, c.Passw
             foreach (var item in zapytanie)
             {
 
-                if (item.Imię_pracownika.TrimEnd().Equals(textBoxImie.Text) && item.Nazwisko_pracownika.TrimEnd().Equals(textBoxNazwisko.Text) && item.Password.TrimEnd().Equals(PasswordBox.Password) && item.aktywny.Equals(true))
+                if (item.Imię_pracownika.TrimEnd().Equals(textBoxImie.Text.TrimEnd()) && item.Nazwisko_pracownika.TrimEnd().Equals(textBoxNazwisko.Text.TrimEnd()) && item.Password.TrimEnd().Equals(PasswordBox.Password.TrimEnd()) && item.aktywny.Equals(true))
                 {
                     OknoPracownika okno1 = new OknoPracownika(item.Id_Pracownika);
                     zalogowany = true;
