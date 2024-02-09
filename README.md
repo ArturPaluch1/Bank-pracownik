@@ -5,15 +5,12 @@ Program pozawala tworzyć pracowników, którzy po zalogowaniu mogą tworzyć ko
 
 Program został zrealizowany jako projekt WPF, przy wykorzystaniu Entity Frameworka. Krzysta z bazy danych MS SQL.
 Plik z bazą danych Bank.mdf znajduje się w folderze Pliki z bazą w repozytorium Bank-klient. Aby program działał, trzeba utworzyć bazę danych MS SQL korzystając z tego pliku.
-
 <details >
  <summary>Ekran logowania</summary>
 <a href="https://ibb.co/kgQVmd2"><img src="https://i.ibb.co/jvg9Jpk/UO0013.jpg" alt="UO0013" border="0"></a>
-
 <details >
  <summary> Ekran rejestracji pracownika </summary>
 <a href="https://ibb.co/kJxxyr2"><img src="https://i.ibb.co/9hNNvfH/UO0033.jpg" alt="UO0033" border="0"></a>
-
 <details >
  <summary> Ekran po zalogowaniu </summary>
 <a href="https://ibb.co/PcNkktN"><img src="https://i.ibb.co/K2XnnmX/UO0014.jpg" alt="UO0014" border="0"></a>
@@ -25,11 +22,10 @@ Plik z bazą danych Bank.mdf znajduje się w folderze Pliki z bazą w repozytori
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/X41FyMB/UO0016.jpg" alt="UO0016" border="0"></a>
 <details >
  <summary> Ekran edycji klienta </summary>
-<a href="https://ibb.co/S0mqxG9"><img src="https://i.ibb.co/ftNmSLP/UO0018.jpg" alt="UO0018" border="0"></a><br /><a target='_blank' href='https://pl.imgbb.com/'>imgur my images</a><br />
+<a href="https://ibb.co/S0mqxG9"><img src="https://i.ibb.co/ftNmSLP/UO0018.jpg" alt="UO0018" border="0"></a>
 <details >
  <summary> Wyświetlenie szczegółów klienta </summary>
 <a href="https://ibb.co/ZNS3zqB"><img src="https://i.ibb.co/M9fbkFc/UO0020.jpg" alt="UO0020" border="0"></a>
-
 <details >
  <summary> Lista kredytów </summary>
 <a href="https://ibb.co/F6DHq34"><img src="https://i.ibb.co/R2Dj4bT/UO0023.jpg" alt="UO0023" border="0"></a>
@@ -50,7 +46,7 @@ Plik z bazą danych Bank.mdf znajduje się w folderze Pliki z bazą w repozytori
 <a href="https://ibb.co/xLZGLTV"><img src="https://i.ibb.co/1QcKQWH/UO0030.jpg" alt="UO0030" border="0"></a>
  <details >
  <summary> Przeprowadzanie wpłaty </summary>
-<a href="https://ibb.co/jrLbGFC"><img src="https://i.ibb.co/CHnmvFj/UO0031.jpg" alt="UO0031" border="0"></a><br /><a target='_blank' href='https://pl.imgbb.com/'>lightshot gallery</a><br />
+<a href="https://ibb.co/jrLbGFC"><img src="https://i.ibb.co/CHnmvFj/UO0031.jpg" alt="UO0031" border="0"></a>
  <details >
  <summary> Wyświetlenie listy pracowników </summary>
 <a href="https://ibb.co/KKfzngF"><img src="https://i.ibb.co/mN2FpK6/UO0032.jpg" alt="UO0032" border="0"></a>
