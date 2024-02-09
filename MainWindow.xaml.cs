@@ -32,28 +32,41 @@ namespace WpfApplication1
         }
         private void zalogujButtonClick(object sender, RoutedEventArgs e)
         {
-            var zapytanie =
-from c in dc.Pracownicy
-select new { c.Id_Pracownika, c.Imię_pracownika, c.Nazwisko_pracownika, c.Password, c.aktywny };
-            bool zalogowany = false;
-            foreach (var item in zapytanie)
-            {
-
-                if (item.Imię_pracownika.TrimEnd().Equals(textBoxImie.Text.TrimEnd()) && item.Nazwisko_pracownika.TrimEnd().Equals(textBoxNazwisko.Text.TrimEnd()) && item.Password.TrimEnd().Equals(PasswordBox.Password.TrimEnd()) && item.aktywny.Equals(true))
+            try
                 {
-                    OknoPracownika okno1 = new OknoPracownika(item.Id_Pracownika);
-                    zalogowany = true;
-                    okno1.Show();
-                    this.Close();
-                    break;
+                Pracownicy zalogowanyPracownik = dc.Pracownicy.ToList().Where(
+                  a => textBoxImie.Text.TrimEnd().ToLower() == a.Imię_pracownika.TrimEnd().ToLower()
+                  && textBoxNazwisko.Text.TrimEnd().ToLower().Equals(a.Nazwisko_pracownika.TrimEnd().ToLower())
+                  && PasswordBox.Password.TrimEnd().Equals(a.Password.TrimEnd())
+                      ).FirstOrDefault();
+
+                if (zalogowanyPracownik != null)
+                {
+                    if (zalogowanyPracownik.aktywny == true)
+                    {
+                        OknoPracownika okno1 = new OknoPracownika((zalogowanyPracownik as Pracownicy).Id_Pracownika);
+
+                        okno1.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Podany pracownik jest nieaktywny");
+                    }
+
 
                 }
-
-            };
-
-            if (zalogowany.Equals(false))
+                else
+                {
+                  
+                }
+            }
+            catch
+            {
                 MessageBox.Show("Błąd logowania do bazy danych.");
-
+            }
+          
+      
         }
 
         private void zarejestrujButtonClick(object sender, RoutedEventArgs e)
